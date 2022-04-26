@@ -5,8 +5,8 @@ import NestedComm from './logic/nestedDatalogic';
 function App() {
   return (
     <div className="App">
-      {/* <Home /> */}
-      <NestedComm />
+      <Home />
+      {/* <NestedComm /> */}
     </div>
   );
 }

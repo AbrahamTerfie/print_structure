@@ -1,6 +1,7 @@
 import React from 'react'
 import { CardComponent, AddButton } from '../Components/index'
 import { Col, Row } from 'reactstrap'
+import NestedComm from '../logic/nestedDatalogic'
 export default function Home() {
     return (
         <div>
@@ -12,7 +13,8 @@ export default function Home() {
                 <h3> manage hirearchy  </h3>
             </Row>
 
-            <CardComponent />
+            {/* <CardComponent /> */}
+            <NestedComm />
 
         </div>
     )

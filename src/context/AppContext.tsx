@@ -1,35 +1,26 @@
 import React, { useState, createContext } from "react";
+import { commentData } from "../data/data";
 interface AuxProps {
     children: JSX.Element[] | JSX.Element;
 }
 type InitStateType = {
-    state: Questionare;
-    setState: React.Dispatch<React.SetStateAction<Questionare>>;
+    state: NestedData;
+    setState: React.Dispatch<React.SetStateAction<NestedData>>;
 };
-
-interface Questionare {
-    activeCatagory: string;
-    activeCategoryData: {};
-    categoryAnswers: {};
-    parentNode: string;
-    name: string;
-    description: string;
-    link: string;
-    color: string;
-
+interface NestedData {
+    title: string;
+    author: string;
+    comments: Array<{
+        id: number;
+        text: string;
+        author: string;
+        children: Array<{
+            text: string;
+        }>;
+    }>;
 }
+const initState: NestedData = commentData
 
-const initState: Questionare = {
-    activeCatagory: "opportunities",
-    activeCategoryData: {},
-    categoryAnswers: {},
-    parentNode: "",
-    name: "",
-    description: "",
-    link: "",
-    color: "",
-
-};
 
 export const AppContext = createContext<InitStateType>({
     state: initState,

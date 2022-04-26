@@ -1,12 +1,13 @@
-import React from "react"
+import React, { useState, useContext } from "react"
 import { commentData } from '../data/data'
 import { Button } from 'reactstrap'
+import { AppContext } from '../context/AppContext'
+
+
 
 function Comment({ comment }: any) {
   const nestedComments = (comment.children || []).map((comment: { id: any }) => {
     return <Comment
-
-
       key={comment.id} comment={comment} type="child" />
   })
 
@@ -28,7 +29,6 @@ function Comment({ comment }: any) {
         <Button
           outline
           size="sm"
-
           onClick={() => {
             console.log(comment)
           }}
@@ -42,18 +42,17 @@ function Comment({ comment }: any) {
 }
 
 function NestedComm() {
+  const { state, setState } = useContext(AppContext);
+console.log("state", state)
   return (
-    <div 
-    style={{
-      // "marginLeft": "55px", "marginTop": "20px",
-      // alligh center 
-      "display": "flex",
-      "flexDirection": "row",
-      "justifyContent": "space-between"
-
-    }}
+    <div
+      style={{
+        "display": "flex",
+        "flexDirection": "row",
+        "justifyContent": "space-between"
+      }}
     >
-      {commentData.comments.map((comment) => {
+      {state.comments.map((comment) => {
         return (
           <div>
             <Comment

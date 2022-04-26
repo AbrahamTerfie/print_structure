@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react"
-import { commentData } from '../data/data'
-import { Button } from 'reactstrap'
+
+import { Button, Modal, ModalFooter, ModalHeader } from 'reactstrap'
+import AddChildrenModal from "../Components/AddChildrenModal"
 import { AppContext } from '../context/AppContext'
 
 
@@ -10,7 +11,8 @@ function Comment({ comment }: any) {
     return <Comment
       key={comment.id} comment={comment} type="child" />
   })
-
+  const [modal, setModal] = useState(false);
+  const toggle = () => setModal(!modal);
   return (
     <div>
       <div
@@ -29,13 +31,39 @@ function Comment({ comment }: any) {
         <Button
           outline
           size="sm"
-          onClick={() => {
-            console.log(comment)
-          }}
+          onClick={toggle}
         >
           add children for {comment.text}
         </Button>
       </div>
+
+
+      <Modal
+        scrollable
+        size="xl"
+        isOpen={modal}
+        toggle={toggle}
+      >
+        <ModalHeader toggle={function noRefCheck() { }}>
+          Add chldren to    "{" parent node  "}"
+        </ModalHeader>
+        <AddChildrenModal />
+
+
+
+        <ModalFooter>
+          <Button
+            color="primary"
+            onClick={toggle}
+          >
+            Do Something
+          </Button>
+          {' '}
+          <Button onClick={toggle}>
+            Cancel
+          </Button>
+        </ModalFooter>
+      </Modal>
 
     </div>
   )
@@ -43,24 +71,30 @@ function Comment({ comment }: any) {
 
 function NestedComm() {
   const { state, setState } = useContext(AppContext);
-console.log("state", state)
-  return (
-    <div
-      style={{
-        "display": "flex",
-        "flexDirection": "row",
-        "justifyContent": "space-between"
-      }}
-    >
-      {state.comments.map((comment) => {
-        return (
-          <div>
-            <Comment
-              key={comment.id} comment={comment} />
 
-          </div>
-        )
-      })}
+  // console.log("state", state)
+  return (
+    <div>
+      <div
+        style={{
+          "display": "flex",
+          "flexDirection": "row",
+          "justifyContent": "space-between"
+        }}
+      >
+        {state.comments.map((comment) => {
+          return (
+            <div>
+              <Comment
+                key={comment.id} comment={comment} />
+
+            </div>
+          )
+        })}
+      </div>
+
+
+
     </div>
   )
 }

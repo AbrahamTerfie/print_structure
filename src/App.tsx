@@ -1,11 +1,12 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-
+import { Home } from './pages/index';
+import NestedComm from './logic/nestedDatalogic';
 function App() {
   return (
     <div className="App">
-     this is the first one 
+      {/* <Home /> */}
+      <NestedComm />
     </div>
   );
 }

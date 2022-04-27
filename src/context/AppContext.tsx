@@ -7,18 +7,23 @@ type InitStateType = {
     state: NestedData;
     setState: React.Dispatch<React.SetStateAction<NestedData>>;
     newChild: sessionStorageType;
-    setNewchildren : React.Dispatch<React.SetStateAction<sessionStorageType>>;
+    setNewchildren: React.Dispatch<React.SetStateAction<sessionStorageType>>;
 
 };
+
 interface NestedData {
-    title: string;
-    author: string;
-    comments: Array<{
+    name: string;
+    description: string;
+    link: string;
+    children: Array<{
         id: number;
-        text: string;
-        author: string;
+        name: string;
+        description: string;
+        link: string;
         children: Array<{
-            text: string;
+            name: string;
+            description: string;
+            link: string;
         }>;
     }>;
 }
@@ -52,7 +57,7 @@ export default function AppStore({ children }: AuxProps) {
             newChild,
             setNewchildren,
 
-            
+
 
         }}>{children}</AppContext.Provider>
     );

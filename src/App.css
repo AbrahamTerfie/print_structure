@@ -1,27 +1,33 @@
 .App {
   text-align: center;
   padding: 10px;
+  background-color: #a2c3a3;
 }
 
 .cardContainer {
 
-  width: 25em;
+  /* width: 25em; */
   /* height: 10em; */
   padding: 30px;
 
-  border-radius: 4px;
-  background: linear-gradient(145deg, #92b093, #add1ae);
-  box-shadow: 5px 5px 11px #607360,
-    -5px -5px 11px #e4ffe6;
+  /* border-radius: 10px;
+  background: linear-gradient(145deg, #add1ae, #92b093);
+  box-shadow:  7px 7px 14px #607360,
+               -7px -7px 14px #e4ffe6; */
+
+               border-radius: 10px;
+background: linear-gradient(145deg, #adafd1, #9294b0);
+box-shadow:  7px 7px 14px #606173,
+             -7px -7px 14px #e4e7ff;
 
 }
 
 /* cardContainer hover */
 .cardContainer:hover {
-  border-radius: 4px;
-  background: linear-gradient(145deg, #add1ae, #92b093);
-  box-shadow: 5px 5px 11px #607360,
-    -5px -5px 11px #e4ffe6;
+  border-radius: 10px;
+  background: #a2c3a3;
+  box-shadow: inset 7px 7px 14px #607360,
+              inset -7px -7px 14px #e4ffe6;
 }
 
 .headerTitle {
@@ -41,7 +47,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-  width: max-content;
+  /* width: max-content; */
 }
 
 .cardBottom {
@@ -51,5 +57,5 @@
   align-items: center;
   margin-bottom: 20px;
   margin-right: 10em;
-  width: 23%;
+  /* width: 23%; */
 }

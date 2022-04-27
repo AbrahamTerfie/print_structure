@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react"
+import React, { useState, useContext, useEffect } from "react"
 
 import { Button, Modal, ModalFooter, ModalHeader, Col, FormGroup, Label, Input, ModalBody, Form, Row } from 'reactstrap'
 
@@ -6,7 +6,8 @@ import { AppContext } from '../context/AppContext'
 
 
 const resetFormData = {
-  id: 0,
+  id: '',
+  parentId: '',
   name: '',
   description: '',
   link: '',
@@ -16,11 +17,10 @@ const resetFormData = {
 
 function Comment({ comment }: any) {
 
-  const { state, newChild, setNewchildren , setState} = useContext(AppContext)
+  const { state, newChild, setNewchildren, setState } = useContext(AppContext)
   const [formData, setFormData] = useState({
-    // id: comment.id + 1,
-    //assign random ew id
-    id: Math.floor(Math.random() * 100),
+    id: Math.floor(Math.random() * 100).toString(),
+    parentId: comment.id,
     name: '',
     description: '',
     link: '',
@@ -28,8 +28,8 @@ function Comment({ comment }: any) {
   })
   const { name, description, link } = formData
   const onChange = (e: any) => setFormData({ ...formData, [e.target.name]: e.target.value })
-  console.log("form data", formData)
-  console.log("newChild", newChild)
+  // console.log("form data", formData)
+  // console.log("newChild", newChild)
   const onSubmit = (e: any) => {
     e.preventDefault()
     setNewchildren({ ...newChild, newChild: formData })
@@ -37,15 +37,27 @@ function Comment({ comment }: any) {
     setFormData(resetFormData)
   }
 
-//pop comment from newChild
-  const onDelete = (e: any) => {
-    e.preventDefault()
-    setNewchildren({ ...newChild, newChild: resetFormData.children })
-    comment.children.pop()
+
+  function removeFromTree(node: any, id: number) {
+    if (node.id == id) {
+      node = undefined
+    } else {
+      node.children.forEach((child: any, id: any) => {
+        console.log("child", child)
+        if (!removeFromTree(child, id)) node.children.splice(id, 1)
+      })
+    }
+    return node
   }
 
-
-
+  const deleteFunction = (id: number) => {
+    state.children.forEach((item) => item.children.forEach((child, index) => {
+      if (child.id === id) {
+        return item.children.splice(index, 1);
+      }
+    }));
+    setState({ ...state, children: state.children })
+  }
   const nestedComments = (comment.children || []).map((comment: { id: any }) => {
     return <Comment
       key={comment.id} comment={comment} type="child" />
@@ -57,7 +69,7 @@ function Comment({ comment }: any) {
       <div
         className="cardContainer  cardTop"
         style={{
-          "marginLeft": "55px", "marginTop": "20px",
+          "marginLeft": "15px", "marginTop": "20px",
           "width": "max-content",
           "display": "flex",
           "flexDirection": "column",
@@ -84,7 +96,8 @@ function Comment({ comment }: any) {
             <Button
               outline
               size="sm"
-              onClick={onDelete}
+              onClick={(e) => deleteFunction(comment.id)}
+
               color="danger"
             >
               delete
@@ -111,7 +124,7 @@ function Comment({ comment }: any) {
                   <Input
                     id="name"
                     name="name"
-                    placeholder="card name "
+                    placeholder="carname "
                     type="text"
                     value={name}
                     onChange={onChange}
@@ -195,7 +208,7 @@ function NestedComm() {
           return (
             <div>
               <Comment
-                key={comment.id} comment={comment} />
+                key={comment.name} comment={comment} />
             </div>
           )
         })}

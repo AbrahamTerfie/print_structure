@@ -11,22 +11,18 @@ type InitStateType = {
 
 };
 
+
+
+//interface type for {commentdata}
 interface NestedData {
+    id: number;
+    parentId: number;
     name: string;
     description: string;
     link: string;
-    children: Array<{
-        id: number;
-        name: string;
-        description: string;
-        link: string;
-        children: Array<{
-            name: string;
-            description: string;
-            link: string;
-        }>;
-    }>;
+    children: NestedData[];
 }
+
 
 interface sessionStorageType {
     parentComment: {};

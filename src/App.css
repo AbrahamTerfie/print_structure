@@ -5,21 +5,16 @@
 }
 
 .cardContainer {
-
-  /* width: 25em; */
-  /* height: 10em; */
   padding: 30px;
-
-  /* border-radius: 10px;
-  background: linear-gradient(145deg, #add1ae, #92b093);
-  box-shadow:  7px 7px 14px #607360,
-               -7px -7px 14px #e4ffe6; */
-
-               border-radius: 10px;
-background: linear-gradient(145deg, #adafd1, #9294b0);
-box-shadow:  7px 7px 14px #606173,
-             -7px -7px 14px #e4e7ff;
-
+  border-radius: 10px;
+  background: linear-gradient(145deg, #adafd1, #9294b0);
+  box-shadow: 7px 7px 14px #606173,
+    -7px -7px 14px #e4e7ff;
+    margin-left: 15px;
+    margin-top: 20px;
+    width: max-content;
+    display: flex;
+    justify-content: space-evenly;
 }
 
 /* cardContainer hover */
@@ -27,7 +22,7 @@ box-shadow:  7px 7px 14px #606173,
   border-radius: 10px;
   background: #a2c3a3;
   box-shadow: inset 7px 7px 14px #607360,
-              inset -7px -7px 14px #e4ffe6;
+    inset -7px -7px 14px #e4ffe6;
 }
 
 .headerTitle {

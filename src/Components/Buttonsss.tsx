@@ -3,7 +3,7 @@ import { Button } from 'reactstrap'
 export default function Buttonsss({ name, buttonOptions }:
     { name: string, buttonOptions: any }) {
     return (
-        <Button color="primary" {...buttonOptions} >
+        <Button  {...buttonOptions} >
             {name}
         </Button>
     )

@@ -1,31 +1,28 @@
 import React, { useState, useContext } from "react"
-
-import { Button, Modal, ModalFooter, ModalHeader, Col, FormGroup, Label, Input, ModalBody, Form, Row } from 'reactstrap'
+import { Modal, ModalFooter, ModalHeader, Col, ModalBody, Form, Row } from 'reactstrap'
 import { v4 as uuidv4 } from 'uuid';
 import { AppContext } from '../context/AppContext'
-import { resetFormData } from '../Constant/formState'
 import Forminput from '../Components/FormInput'
 import Buttonsss from '../Components/Buttonsss'
-function Comment({ comment }: any) {
 
-  const { state, setState, deleteFunction } = useContext(AppContext)
-  const [formData, setFormData] = useState({
-    id: uuidv4(),
-    name: '',
-    description: '',
-    link: '',
-    children: [],
-  })
+
+
+function Comment({ comment }: any) {
+  const { state, deleteFunction, formData, setFormData } = useContext(AppContext)
   const { name, description, link } = formData
   const onChange = (e: any) => setFormData({ ...formData, [e.target.name]: e.target.value })
-
-  const onSubmit = (e: any) => {
+  const onSubmit = (e: Event) => {
     e.preventDefault()
-    console.log(' before submit ', formData.id)
-    comment.children.push(formData) && setFormData(resetFormData) &&
-      console.log('id after submit ', formData.id)
-  }
+    comment.children.push(formData)
+    setFormData({
+      id: uuidv4(),
+      name: '',
+      description: '',
+      link: '',
+      children: [],
 
+    })
+  }
 
   const nestedComments = (comment.children || []).map((comment: { id: any }) => {
     return <Comment
@@ -33,13 +30,73 @@ function Comment({ comment }: any) {
   })
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
+
+
+
+  function modalBodyForm() {
+    return (
+      <Form>
+        <Row>
+          <Col md={3}>
+            <Forminput
+              label="name"
+              inputOptions={{
+                id: "name",
+                name: "name",
+                placeholder: "child name  ",
+                type: "text",
+                value: name,
+                onChange: onChange
+              }} />
+          </Col>
+          <Col md={3}>
+            <Forminput
+              label="description"
+              inputOptions={{
+                id: "description",
+                name: "description",
+                placeholder: "description",
+                type: "text",
+                value: description,
+                onChange: onChange
+              }}
+            />
+          </Col>
+          <Col md={4}>
+            <Forminput
+              label="link"
+              inputOptions={{
+                id: "link",
+                name: "link",
+                placeholder: "link",
+                type: "text",
+                value: link,
+                onChange: onChange
+              }}
+            />
+          </Col>
+          <Col md={1} className="m-4"  >
+            <Buttonsss
+
+              name="add"
+              buttonOptions={{
+                outline: true,
+                onClick: (e: Event) => {
+                  onSubmit(e);
+                },
+                color: "success",
+              }} />
+          </Col>
+        </Row>
+      </Form>
+    )
+  }
+
   return (
     <div>
       <div
         className="cardContainer  cardTop"
-        style={{ "flexDirection": "column", }}
-
-      >
+        style={{ "flexDirection": "column", }} >
         <div> name :  {comment.name}</div>
         <div> description :  {comment.description}</div>
         <div> link:  {comment.link}</div>
@@ -76,72 +133,24 @@ function Comment({ comment }: any) {
         toggle={toggle}
       >
         <ModalHeader toggle={toggle}>
-          <small>Add chldren to </small><>{comment.text}</>
+          <small>Add chldren to </small><>{comment.name}</>
         </ModalHeader>
         <ModalBody>
-          <Form>
-            <Row>
-              <Col md={4}>
-                <Forminput
-                  label="name"
-                  inputOptions={{
-                    id: "name",
-                    name: "name",
-                    placeholder: "child name  ",
-                    type: "text",
-                    value: name,
-                    onChange: onChange
-                  }} />
-              </Col>
-              <Col md={4}>
-                <Forminput
-                  label="description"
-                  inputOptions={{
-                    id: "description",
-                    name: "description",
-                    placeholder: "description",
-                    type: "text",
-                    value: description,
-                    onChange: onChange
-                  }}
-                />
-              </Col>
-              <Col md={4}>
-                <Forminput
-                  label="link"
-                  inputOptions={{
-                    id: "link",
-                    name: "link",
-                    placeholder: "link",
-                    type: "text",
-                    value: link,
-                    onChange: onChange
-                  }}
-                />
-              </Col>
-            </Row>
-          </Form>
+
+          <div>
+            {modalBodyForm()}
+          </div>
+
         </ModalBody>
         <ModalFooter>
 
           <Buttonsss
-            name="cancel"
+            name="close"
             buttonOptions={{
               outline: true,
               color: "danger",
 
               onClick: toggle
-            }} />
-         
-          <Buttonsss
-            name="add"
-            buttonOptions={{
-              outline: true,
-              color: "success",
-              onClick: (e: Event) => {
-                onSubmit(e);
-                toggle()
-              }
             }} />
         </ModalFooter>
       </Modal>

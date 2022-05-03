@@ -1,7 +1,11 @@
+*{
+  /* background-color: #a2c3a3; */
+
+}
+
 .App {
   text-align: center;
   padding: 10px;
-  background-color: #a2c3a3;
 }
 
 .cardContainer {
@@ -15,6 +19,7 @@
     width: max-content;
     display: flex;
     justify-content: space-evenly;
+
 }
 
 /* cardContainer hover */

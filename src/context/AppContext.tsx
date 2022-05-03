@@ -1,65 +1,42 @@
 import React, { useState, createContext } from "react";
 import { commentData } from "../data/data";
-interface AuxProps {
-    children: JSX.Element[] | JSX.Element;
-}
-type InitStateType = {
-    modal: boolean,
-    setModal: React.Dispatch<React.SetStateAction<boolean>>,
-    state: NestedData;
-    setState: React.Dispatch<React.SetStateAction<NestedData>>;
-    newChild: sessionStorageType;
-    setNewchildren: React.Dispatch<React.SetStateAction<sessionStorageType>>;
-    deleteFunction: (id: string, parentNode: any) => void;
-    addParentNode: (parentNode: any) => void;
-    currentComment: {}
-    setCurrentComment: React.Dispatch<React.SetStateAction<{}>>;
-};
+// import { v4 as uuidv4 } from 'uuid';
+import {
+    NestedData,
+    formDataInterface,
+    AuxProps,
+    InitStateType
+} from "../types/types";
 
 
 
-//interface type for {commentdata}
-interface NestedData {
-    id: string;
-    name: string;
-    description: string;
-    link: string;
-    children: NestedData[];
-}
-
-
-interface sessionStorageType {
-    parentComment: {};
-    newChild: {};
-}
-
-const newChildstate: sessionStorageType = {
-    parentComment: {},
-    newChild: {}
-}
 const initState: NestedData = commentData
+const formDataState: formDataInterface = {
+    id: '',
+    name: '',
+    description: '',
+    link: '',
+    children: [],
 
-
+}
 export const AppContext = createContext<InitStateType>({
     modal: false,
     setModal: () => { },
     state: initState,
     setState: () => { },
-    newChild: newChildstate,
-    setNewchildren: () => { },
     deleteFunction: () => { },
     addParentNode: () => { },
-    currentComment: {},
-    setCurrentComment: () => { }
+    formData: formDataState,
+    setFormData: () => { },
+
+
 });
 
 export default function AppStore({ children }: AuxProps) {
     const [state, setState] = useState(initState);
     const [modal, setModal] = useState(false);
-  const [currentComment, setCurrentComment] = useState()
+    const [formData, setFormData] = useState(formDataState)
 
-
-    const [newChild, setNewchildren] = useState(newChildstate);
     function deleteFunction(id: string, parentNode: any) {
         parentNode.children.forEach((item: any) => {
             if (item.id === id) {
@@ -76,23 +53,22 @@ export default function AppStore({ children }: AuxProps) {
         });
         setState({ ...state, children: state.children })
     }
-    //function add parent node to state
+
     function addParentNode(parentNode: any) {
         setState({ ...state, children: [...state.children, parentNode] })
     }
 
+
+    const values = {
+        modal,
+        setModal,
+        state,
+        setState,
+        deleteFunction,
+        addParentNode,
+        formData, setFormData
+    }
     return (
-        <AppContext.Provider value={{
-            modal,
-            setModal,
-            state,
-            setState,
-            newChild,
-            setNewchildren,
-            deleteFunction,
-            addParentNode,
-            currentComment: {},
-            setCurrentComment: () => { }
-        }}>{children}</AppContext.Provider>
+        <AppContext.Provider value={values}>{children}</AppContext.Provider>
     );
 }

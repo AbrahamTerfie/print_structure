@@ -35,8 +35,31 @@ export const commentData = {
                         }
                     ]
                 },
+                {
+                    name: " child 1.2 ",
+                    id: uuid(),
+                    description: "grzm",
+                    link: "grzm",
+                    children: []
+                }
+
             ]
         },
+        {
+            name: " child 2 ",
+            id: uuid(),
+            description: "grzm",
+            link: "grzm",
+            children: []
+        },
+        {
+            name: " child 3 ",
+            id: uuid(),
+            description: "grzm",
+            link: "grzm",
+            children: []
+        }
+        
     ]
 
 }

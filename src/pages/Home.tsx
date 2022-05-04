@@ -5,7 +5,8 @@ import Buttonsss from '../Components/Buttonsss'
 import NestedComm from '../logic/nestedDatalogic'
 import { AppContext } from '../context/AppContext'
 import { v4 as uuidv4 } from 'uuid';
-
+import Print from '../print/print'
+import { PDFViewer, PDFDownloadLink } from '@react-pdf/renderer'
 export default function Home() {
     const { addParentNode, formData, setFormData } = useContext(AppContext)
     const { name, description, link } = formData
@@ -36,8 +37,24 @@ export default function Home() {
                     <Button
                         outline
                         color='success'
-                        onClick={toggle}> add parent </Button></Col>
+                        onClick={toggle}> add parent </Button>
+                </Col>
             </Row>
+
+
+            <Row
+                style={{
+                    height: '50em',
+                }}
+            >
+                <PDFViewer>
+                    <Print />
+                </PDFViewer>
+                {/* <PDFDownloadLink document={<Print />} fileName="somename.pdf">
+                    {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Download now!')}
+                </PDFDownloadLink> */}
+            </Row>
+
             <NestedComm />
             <div>
                 <Modal

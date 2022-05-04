@@ -31,7 +31,7 @@ export default function Home() {
         <div>
             <Row className="headerTitle" sm={12} md={12} lg={12}  >
                 <Col lg={9} md={9} sm={6} >
-                    <h1> manage hirearchy  </h1>
+                    <h1> save hierarchy as pdf  </h1>
                 </Col>
 
                 <Col>

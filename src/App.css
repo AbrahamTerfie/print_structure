@@ -2,23 +2,29 @@
   /* background-color: #a2c3a3; */
   font-family: 'Montserrat', sans-serif;
 }
-
+* p {
+  font-family: 'Mukta', sans-serif;
+  color: #222;
+  font-size: large;
+}
 .App {
   text-align: center;
   padding: 10px;
 }
 
 .cardContainer {
-  padding: 30px;
+  padding: 2em;
   border-radius: 10px;
   background: linear-gradient(145deg, #adafd1, #9294b0);
   box-shadow: 7px 7px 14px #606173,
     -7px -7px 14px #e4e7ff;
-  margin-left: 15px;
-  margin-top: 20px;
+  margin-left: 1em;
+  margin-top: 1em;
   width: max-content;
+  height: max-content;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-start;
+  align-items: flex-start;
 
 }
 
@@ -44,8 +50,8 @@
 .cardTop {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+  /* justify-content: space-between; */
+  /* align-items: center; */
   margin-bottom: 20px;
   /* width: max-content; */
 }

@@ -7,14 +7,12 @@ export const commentData = {
     link: "root link",
     children: [
         {
-            name: "entry",
+            name: "",
             id: uuid(),
             description: "",
             link: "",
             children: []
         },
-
-
     ]
 
 }

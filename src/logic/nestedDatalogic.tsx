@@ -95,20 +95,22 @@ function Comment({ comment }: any) {
   return (
     <div>
       <div
-        className="cardContainer  cardTop"
-        style={{ "flexDirection": "column", }} >
-        <div> name :  {comment.name}</div>
-        <div> description :  {comment.description}</div>
-        <div> link:  {comment.link}</div>
+        className="cardContainer  "
+        style={{
+          "flexDirection": "column",
+          justifyContent: "flex-start",
+        }}>
+        <p> name :  {comment.name}</p>
+        <p> description :  {comment.description}</p>
+        <p> link:  {comment.link}</p>
         {nestedComments}
-        <Row className="m-4" >
+        <Row className="m-4 p-2" >
           <Col>
-
             <Buttonsss
-              name="add"
+              name="+child"
               buttonOptions={{
                 outline: true,
-                size: "sm",
+                size: "md",
                 onClick: toggle,
                 color: "success",
               }} />
@@ -117,7 +119,7 @@ function Comment({ comment }: any) {
             <Buttonsss
               name="delete"
               buttonOptions={{
-                size: "sm",
+                size: "md",
                 color: "danger",
                 outline: true,
                 onClick: () => comment.children.length === 0 && deleteFunction(comment.id, state),
@@ -149,7 +151,6 @@ function Comment({ comment }: any) {
             buttonOptions={{
               outline: true,
               color: "danger",
-
               onClick: toggle
             }} />
         </ModalFooter>

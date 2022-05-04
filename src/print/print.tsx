@@ -74,7 +74,9 @@ function Comment({ comment }: any) {
         <Text style={styles.text}>  {"- "} {comment.name}    </Text>
         <Text style={styles.text}>  {" "}  {comment.description}   </Text>
         <Text style={styles.text} > {"   "}
-          <Link src={comment.link}> {comment.link} </Link>
+          <Link
+            src={comment.link}
+          > {comment.link} </Link>
         </Text>
       </View>
       {nestedComments}
@@ -85,15 +87,12 @@ function Comment({ comment }: any) {
 
 
 export default function Print() {
-  const { state} = useContext(AppContext)
+  const { state } = useContext(AppContext)
 
- 
-  console.log("state from print", state)
   return (
     <MyDocument>
       <MyPage size="A4" style={styles.page}>
         <View style={styles.titleContainer} >
-          {/* <Text style={styles.title} > {formData.name} </Text> */}
           <Text style={styles.subTitle} > {state.description} </Text>
         </View>
         <View

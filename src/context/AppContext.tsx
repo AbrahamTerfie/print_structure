@@ -1,14 +1,11 @@
 import React, { useState, createContext } from "react";
 import { commentData } from "../data/data";
-// import { v4 as uuidv4 } from 'uuid';
 import {
     NestedData,
     formDataInterface,
     AuxProps,
     InitStateType
 } from "../types/types";
-
-
 
 const initState: NestedData = commentData
 const formDataState: formDataInterface = {
@@ -36,7 +33,6 @@ export default function AppStore({ children }: AuxProps) {
     const [state, setState] = useState(initState);
     const [modal, setModal] = useState(false);
     const [formData, setFormData] = useState(formDataState)
-
     function deleteFunction(id: string, parentNode: any) {
         parentNode.children.forEach((item: any) => {
             if (item.id === id) {
@@ -55,7 +51,8 @@ export default function AppStore({ children }: AuxProps) {
     }
 
     function addParentNode(parentNode: any) {
-        setState({ ...state, children: [...state.children, parentNode] })
+        state.children.push(parentNode)
+
     }
 
 
@@ -66,7 +63,8 @@ export default function AppStore({ children }: AuxProps) {
         setState,
         deleteFunction,
         addParentNode,
-        formData, setFormData
+        formData, setFormData,
+
     }
     return (
         <AppContext.Provider value={values}>{children}</AppContext.Provider>

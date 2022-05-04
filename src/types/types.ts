@@ -1,9 +1,9 @@
 
 type NestedData = {
-    id: string;
-    name: string;
-    description: string;
-    link: string;
+    id: String;
+    name: String;
+    description: String;
+    link: String;
     children: NestedData[];
 }
 type formDataInterface = {
@@ -26,6 +26,7 @@ type InitStateType = {
     addParentNode: (parentNode: any) => void;
     formData: formDataInterface;
     setFormData: React.Dispatch<React.SetStateAction<formDataInterface>>;
+
 
 };
 

@@ -1,6 +1,6 @@
-*{
+* h1 {
   /* background-color: #a2c3a3; */
-
+  font-family: 'Montserrat', sans-serif;
 }
 
 .App {
@@ -14,11 +14,11 @@
   background: linear-gradient(145deg, #adafd1, #9294b0);
   box-shadow: 7px 7px 14px #606173,
     -7px -7px 14px #e4e7ff;
-    margin-left: 15px;
-    margin-top: 20px;
-    width: max-content;
-    display: flex;
-    justify-content: space-evenly;
+  margin-left: 15px;
+  margin-top: 20px;
+  width: max-content;
+  display: flex;
+  justify-content: space-evenly;
 
 }
 
@@ -31,7 +31,7 @@
 }
 
 .headerTitle {
-  font-size: 2.5em;
+  /* font-size: 2.5em; */
   font-weight: bold;
   color: #7b947c;
   margin-bottom: 20px;

@@ -6,9 +6,9 @@ import NestedComm from '../logic/nestedDatalogic'
 import { AppContext } from '../context/AppContext'
 import { v4 as uuidv4 } from 'uuid';
 import Print from '../print/print'
-import { PDFViewer, PDFDownloadLink } from '@react-pdf/renderer'
+import { PDFDownloadLink } from '@react-pdf/renderer'
 export default function Home() {
-    const { addParentNode, formData, setFormData } = useContext(AppContext)
+    const { addParentNode, formData, setFormData, state } = useContext(AppContext)
     const { name, description, link } = formData
     const onChange = (e: any) => setFormData({ ...formData, [e.target.name]: e.target.value })
     const [modal, setModal] = useState(false);
@@ -30,32 +30,46 @@ export default function Home() {
     return (
         <div>
             <Row className="headerTitle" sm={12} md={12} lg={12}  >
-                <Col lg={4} md={4} sm={4} >
+                <Col lg={9} md={9} sm={6} >
                     <h1> manage hirearchy  </h1>
                 </Col>
+
                 <Col>
                     <Button
                         outline
                         color='success'
                         onClick={toggle}> add parent </Button>
                 </Col>
+
+                <Col>
+                    <PDFDownloadLink document={<Print />} fileName="somename.pdf">
+                        {({ blob, url, loading, error }) => (loading ? <Button
+                            outline
+                            color='success'>
+                            loading ....
+                        </Button> : <Button
+                            outline
+                            color='success'>
+                            save pdf
+                        </Button>
+
+                        )}
+                    </PDFDownloadLink>
+                </Col>
             </Row>
 
 
-            <Row
-                style={{
-                    height: '50em',
-                }}
-            >
-                <PDFViewer>
+            <Row>
+                {/* <PDFViewer style={{ height: "40em" }}>
                     <Print />
-                </PDFViewer>
-                {/* <PDFDownloadLink document={<Print />} fileName="somename.pdf">
-                    {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Download now!')}
-                </PDFDownloadLink> */}
+                </PDFViewer> */}
             </Row>
 
-            <NestedComm />
+
+            {state.children.length === 0 ?
+                <h1>  start by adding a parent node  </h1> :
+                <NestedComm />}
+            {/* <NestedComm /> */}
             <div>
                 <Modal
                     scrollable

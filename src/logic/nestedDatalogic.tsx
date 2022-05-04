@@ -120,7 +120,7 @@ function Comment({ comment }: any) {
                 size: "sm",
                 color: "danger",
                 outline: true,
-                onClick: () => deleteFunction(comment.id, state),
+                onClick: () => comment.children.length === 0 && deleteFunction(comment.id, state),
               }} />
 
           </Col>

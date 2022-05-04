@@ -1,7 +1,7 @@
 
 
 
-import React, { useEffect, useContext, useState } from 'react';
+import React, {  useContext } from 'react';
 import { Page, Text, View, Document, StyleSheet, Link } from '@react-pdf/renderer';
 import { AppContext } from '../context/AppContext';
 const MyDocument: any = Document

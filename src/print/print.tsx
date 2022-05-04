@@ -2,23 +2,22 @@
 
 
 import React, { useState, useContext } from 'react';
-import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
+import { Page, Text, View, Document, StyleSheet, Link } from '@react-pdf/renderer';
 import { AppContext } from '../context/AppContext';
 const MyDocument: any = Document
 const MyPage: any = Page
+const MyLink: any = Link
 // Create styles
 const styles = StyleSheet.create({
   page: {
     display: 'flex',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     flexDirection: 'row',
     backgroundColor: '#E4E4E4',
     paddingTop: '40px',
     height: '100%',
     width: '100%',
     flexWrap: 'wrap',
-
-
   },
   section: {
     margin: 10,
@@ -31,31 +30,31 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   container: {
-    // borderLeft: "1px solid gray",
     borderLeft: "1px solid green",
-    paddingTop: 10,
-    paddingBottom: 10,
-
+    paddingTop: 5,
+    paddingBottom: 5,
   }
 });
 
 
 function Comment({ comment }: any) {
-
   const nestedComments = (comment.children || []).map((comment: { id: any }) => {
     return <Comment
       key={comment.id} comment={comment} type="child" />
   })
-  return (
 
-      <View
-        style={{ paddingLeft: "40px"  }} >
-        <View style={styles.container} >
-          <Text style={styles.text}>  {"- "} name : {comment.name} , {comment.description}   </Text>
-          <Text style={styles.text} > {"    "} link:  {comment.link}</Text>
-        </View>
-        {nestedComments}
+  return (
+    <View
+      style={{ paddingLeft: "40px" }} >
+      <View style={styles.container} >
+        <Text style={styles.text}>  {"- "} name : {comment.name}    </Text>
+        <Text style={styles.text}>  {" "}  {comment.description}   </Text>
+        <Text style={styles.text} > {"   "}
+          <Link src={comment.link}> {comment.link} </Link>
+        </Text>
       </View>
+      {nestedComments}
+    </View>
 
   )
 }
@@ -74,11 +73,8 @@ export default function Print() {
             flexWrap: "wrap",
           }}>
           {state.children.map((comment) => {
-            return (
-
-              <Comment
-                key={comment.name} comment={comment} />
-
+            return (<Comment
+              key={comment.name} comment={comment} />
             )
           })}
         </View>
